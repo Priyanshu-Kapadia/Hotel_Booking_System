@@ -1,0 +1,17 @@
+.hi{
+    width: 100%;
+    border-radius: 10%;
+}
+
+.slick-dots {
+    bottom: 17px;
+}
+
+.slick-dots li.slick-active button:before{
+    color: white;
+}
+
+.slick-dots li button:before{
+    color: white;
+    font-size: 8px;
+}
