@@ -12,7 +12,7 @@ const Section = styled.section`
 const Home = () => {
   return (
     <Section className="section2 flex justify-content items-center overflow-hidden">
-      <div className="container mx-auto lg:p-0 p-8">
+      <div className="container mx-auto lg:mx-10 lg:p-5 p-8">
         <div className="flex flex-col-reverse  lg:grid lg:grid-cols-2 grid-cols-1 gap-10">
           <div className="flex justify-center align-center flex-col">
             <p className="whitespace-normal font-cursive text-white font-bold uppercase lg:text-6xl text-4xl">
