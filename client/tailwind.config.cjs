@@ -5,7 +5,7 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      'cursive': ['Oooh Baby']
+      'cursive': ['Oooh Baby'],
     },
     extend: {},
   },

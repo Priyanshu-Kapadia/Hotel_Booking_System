@@ -3,8 +3,8 @@ import styled from "styled-components";
 import Slider from "react-slick";
 import "./Slider.css"
 
-import Img1 from "../../assets/1.png";
-import Img3 from "../../assets/3.png";
+import Img1 from "../../../../assets/1.png";
+import Img3 from "../../../../assets/3.png";
 
 const SliderBody = styled.div`
 `;
