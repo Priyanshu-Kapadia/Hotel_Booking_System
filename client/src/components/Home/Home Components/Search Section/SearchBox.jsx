@@ -3,7 +3,10 @@ import {
   faCalendarDays,
   faLocationCrosshairs,
   faLocationDot,
+  faMinus,
   faPerson,
+  faPlus,
+  faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "react-date-range/dist/styles.css"; // main style file
@@ -27,35 +30,44 @@ const SearchBox = () => {
   const [openOption, setOpenOption] = useState(false);
   const [options, setOptions] = useState({
     adults: 1,
-    children: 0,
+    childrens: 0,
     rooms: 1,
   });
+
+  const handleOption = (name, operation) => {
+    setOptions((prev) => {
+      return {
+        ...prev,
+        [name]: operation === "i" ? options[name] + 1 : options[name] - 1,
+      };
+    });
+  };
   return (
     <>
-      <div className="headerSearch flex items-center justify-around">
-        <div className="headerSearchItem flex gap-10 items-center">
+      <div className="headerSearch flex items-center justify-around flex-wrap">
+        <div className="headerSearchItem flex xl:gap-9 gap-5 items-center lg:my-0 my-2">
           <FontAwesomeIcon
             icon={faLocationDot}
-            className="text-gray-500 headerSearchIcon"
+            className="text-white headerSearchIcon"
           />
           <input
             type="text"
             placeholder='Search"Thailand,Asia"'
-            className="HeaderSearchInput"
+            className="headerSearchInput"
           />
           <FontAwesomeIcon
             icon={faLocationCrosshairs}
-            className="text-gray-500 headerSearchIcon"
+            className="text-white headerSearchIcon"
           />
         </div>
-        <div className="headerSearchItem flex gap-10 items-center">
+        <div className="headerSearchItem flex xl:gap-9 gap-5 items-center lg:my-0 my-2">
           <FontAwesomeIcon
             icon={faCalendarDays}
-            className="text-gray-500 headerSearchIcon"
+            className="text-white headerSearchIcon"
           />
           <span
             onClick={() => setOpenDate(!openDate)}
-            className="text-gray-500 headerSearchText"
+            className="text-white headerSearchText"
           >{`${format(date[0].startDate, "dd/MM/yyyy")} to ${format(
             date[0].endDate,
             "dd/MM/yyyy"
@@ -69,47 +81,83 @@ const SearchBox = () => {
               className="date"
             />
           )}
-          ;
         </div>
-        <div className="headerSearchItem flex gap-10 items-center">
+        <div className="headerSearchItem flex xl:gap-9 gap-5 items-center lg:my-0 my-2">
           <FontAwesomeIcon
             icon={faPerson}
-            className="text-gray-500 headerSearchIcon"
+            className="text-white headerSearchIcon"
           />
-          <span onClick={() => setOpenOption(!openOption)} className="text-gray-500 headerSearchText">
-            {`${options.adults} adult . ${options.children} children . ${options.rooms} rooms`}
+          <span
+            onClick={() => setOpenOption(!openOption)}
+            className="text-white headerSearchText"
+          >
+            {`${options.adults} adult . ${options.childrens} children . ${options.rooms} rooms`}
           </span>
           {openOption && (
             <div className="options">
               <div className="optionItem flex justify-between items-center">
                 <span className="optionText">Adult's</span>
-                <div className="optionCounter flex items-center gap-9">
-                  <button className="optionCounterButton">-</button>
-                  <span className="optionCounterNumber">1</span>
-                  <button className="optionCounterButton">+</button>
+                <div className="optionCounter flex items-center">
+                  <button
+                    disabled={options.adults <= 1}
+                    className="optionCounterButton"
+                    onClick={() => handleOption("adults", "d")}
+                  >
+                    <FontAwesomeIcon icon={faMinus}/>
+                  </button>
+                  <span className="optionCounterNumber">{options.adults}</span>
+                  <button
+                    className="optionCounterButton"
+                    onClick={() => handleOption("adults", "i")}
+                  >
+                    <FontAwesomeIcon icon={faPlus}/>
+                  </button>
                 </div>
               </div>
               <div className="optionItem flex justify-between items-center">
                 <span className="optionText">Childern's</span>
-                <div className="optionCounter flex items-center gap-9">
-                  <button className="optionCounterButton">-</button>
-                  <span className="optionCounterNumber">1</span>
-                  <button className="optionCounterButton">+</button>
+                <div className="optionCounter flex items-center">
+                  <button
+                    disabled={options.childrens <= 0}
+                    className="optionCounterButton"
+                    onClick={() => handleOption("childrens", "d")}
+                  >
+                    <FontAwesomeIcon icon={faMinus}/>
+                  </button>
+                  <span className="optionCounterNumber">{options.childrens}</span>
+                  <button
+                    className="optionCounterButton"
+                    onClick={() => handleOption("childrens", "i")}
+                  >
+                    <FontAwesomeIcon icon={faPlus}/>
+                  </button>
                 </div>
               </div>
               <div className="optionItem flex justify-between items-center">
                 <span className="optionText">Rooms</span>
-                <div className="optionCounter flex items-center gap-9">
-                  <button className="optionCounterButton">-</button>
-                  <span className="optionCounterNumber">1</span>
-                  <button className="optionCounterButton">+</button>
+                <div className="optionCounter flex items-center">
+                  <button
+                    disabled={options.rooms <= 1}
+                    className="optionCounterButton"
+                    onClick={() => handleOption("rooms", "d")}
+                  >
+                    <FontAwesomeIcon icon={faMinus}/>
+                  </button>
+                  <span className="optionCounterNumber">{options.rooms}</span>
+                  <button
+                    className="optionCounterButton"
+                    onClick={() => handleOption("rooms", "i")}
+                  >
+                    <FontAwesomeIcon icon={faPlus}/>
+                  </button>
                 </div>
               </div>
             </div>
           )}
         </div>
-        <div className="headerSearchItem">
-          <button className="p-3 text-white text-xl font-bold rounded bg-slate-500">
+        <div className="headerSearchItem flex lg:my-0 my-2">
+          <button className="text-white">
+            <FontAwesomeIcon icon={faSearch} className="text-white mr-1"/>
             Search
           </button>
         </div>
