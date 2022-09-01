@@ -45,7 +45,7 @@ const SearchBox = () => {
   return (
     <>
       <div className="headerSearch flex items-center justify-around flex-wrap">
-        <div className="headerSearchItem flex xl:gap-9 gap-5 items-center lg:my-0 my-2">
+        <div className="headerSearchItem flex xl:gap-9 sm:gap-5 gap-2 items-center lg:my-0 my-2">
           <FontAwesomeIcon
             icon={faLocationDot}
             className="text-white headerSearchIcon"
