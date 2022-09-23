@@ -5,10 +5,10 @@ import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import "./Navbar.css"
 
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
+  { name: 'Home', href: '#', current: true },
+  { name: 'Hotels', href: '#', current: false },
+  { name: 'Booking', href: '#', current: false },
+  { name: 'Contact Us', href: '#', current: false },
 ]
 
 function classNames(...classes) {

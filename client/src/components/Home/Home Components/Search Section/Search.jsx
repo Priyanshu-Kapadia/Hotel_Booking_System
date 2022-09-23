@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import HotelList from "../HotelList";
 import CityCarousel from "./CityCarousel";
 import SearchBox from "./SearchBox";
 
 const Section = styled.section`
-  height: 100vh;
+  height: 100%;
   position: relative;
 `;
 
@@ -30,8 +31,9 @@ const Search = () => {
             <SearchBox />
           </GlassMorphing>
         </div>
-        <h2 className="font-sans-serif text-white text-3xl font-medium">Famous Cities</h2>
-        <CityCarousel />
+        <HotelList />
+        {/* <h2 className="font-sans-serif text-white text-3xl font-medium">Famous Cities</h2> */}
+        {/* <CityCarousel /> */}
       </div>
     </Section>
   );
