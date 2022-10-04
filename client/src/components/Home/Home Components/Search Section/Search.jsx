@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import HotelList from "../HotelList";
 import CityCarousel from "./CityCarousel";
 import SearchBox from "./SearchBox";
 
@@ -31,7 +30,6 @@ const Search = () => {
             <SearchBox />
           </GlassMorphing>
         </div>
-        <HotelList />
         {/* <h2 className="font-sans-serif text-white text-3xl font-medium">Famous Cities</h2> */}
         {/* <CityCarousel /> */}
       </div>

@@ -2,16 +2,18 @@ import React from 'react'
 import styled from "styled-components";
 import HotelSlider from "../BannerSlider"
 
+import './banner.css';
+
 const Section = styled.section`
   height: ${`calc(100vh - 64px)`};
   position: relative;
 `;
 const Banner = () => {
   return (
-    <Section className="section2 flex justify-content items-center">
+    <Section className="section2 flex justify-center items-center">
       <div className="container mx-auto lg:mx-10 lg:p-5 p-8">
         <div className="flex flex-col-reverse  lg:grid lg:grid-cols-2 grid-cols-1 gap-10">
-          <div className="flex justify-center align-center flex-col">
+          <div className="flex justify-center md:mx-10 mx-2 align-center flex-col">
             <p className="whitespace-normal font-cursive text-white font-bold uppercase lg:text-6xl text-4xl">
               Hotel Booking
             </p>

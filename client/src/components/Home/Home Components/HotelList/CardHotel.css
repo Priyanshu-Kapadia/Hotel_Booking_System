@@ -29,3 +29,11 @@
     font-weight: 700;
     left: 20px;
 }
+
+@media (max-width: 768px) {
+    .featured {
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+}

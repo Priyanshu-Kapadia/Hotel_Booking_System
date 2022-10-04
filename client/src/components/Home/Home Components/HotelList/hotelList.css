@@ -2,11 +2,12 @@
     margin-top: 50px;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
+    align-items: center;
     gap: 30px;
 }
 
 .homeTitle  {
+    width: 100%;
     max-width: 1024px;
     color: white;
     font-weight: 700;
