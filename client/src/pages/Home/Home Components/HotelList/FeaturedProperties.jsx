@@ -1,7 +1,11 @@
 import React from "react";
+import useFetch from "../../../../hooks/useFetch";
 import "./FeaturedProperties.css";
 
 const FeaturedProperties = () => {
+  const { data, loading, error } = useFetch(
+    "http://localhost:5000/api/hotels/"
+  );
   return (
     <div className="fp">
       <div className="fpItem">
