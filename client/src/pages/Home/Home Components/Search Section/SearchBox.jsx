@@ -14,11 +14,11 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRange } from "react-date-range";
 import { format } from "date-fns";
 import "./SearchBox.css";
-import { parseWithOptions } from "date-fns/fp";
+import { useNavigate } from "react-router-dom";
 
 const SearchBox = () => {
+  const [destination, setDestination] = useState("");
   const [openDate, setOpenDate] = useState(false);
-
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -42,6 +42,13 @@ const SearchBox = () => {
       };
     });
   };
+
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    navigate("/hotels", { state: { destination, date, options } });
+  };
+  
   return (
     <>
       <div className="headerSearch flex items-center justify-around flex-wrap">
@@ -54,6 +61,7 @@ const SearchBox = () => {
             type="text"
             placeholder='Search"Thailand,Asia"'
             className="headerSearchInput"
+            onChange={(e) => setDestination(e.target.value)}
           />
           <FontAwesomeIcon
             icon={faLocationCrosshairs}
@@ -156,7 +164,7 @@ const SearchBox = () => {
           )}
         </div>
         <div className="headerSearchItem flex lg:my-0 my-2">
-          <button className="text-white">
+          <button className="text-white"  onClick={handleSearch}>
             <FontAwesomeIcon icon={faSearch} className="text-white mr-1"/>
             Search
           </button>

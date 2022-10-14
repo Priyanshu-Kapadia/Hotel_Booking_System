@@ -4,6 +4,7 @@ const Footer = () => {
   return (
     <div className="footer">
       <div className="container mx-auto flex justify-center items-center flex-col lg:px-16">
+        <div className="footer-body">
         <div className="fLists">
           <ul className="fList">
             <li className="fListItem">Countries</li>
@@ -46,6 +47,7 @@ const Footer = () => {
           </ul>
         </div>
         <div className="fText">Copyright © 2022 Priyanshu Developer.</div>
+        </div>
       </div>
     </div>
   );

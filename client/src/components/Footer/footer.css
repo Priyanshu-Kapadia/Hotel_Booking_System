@@ -1,8 +1,12 @@
 .footer {
   width: 100%;
-  /* max-width: 1024px; */
   font-size: 12px;
   background-color: #003580;
+}
+
+.footer-body {
+  width: 100%;
+  max-width: 1024px;
 }
 
 .fLists {
