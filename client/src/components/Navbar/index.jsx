@@ -5,8 +5,8 @@ import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import "./Navbar.css"
 
 const navigation = [
-  { name: 'Home', href: '#', current: true },
-  { name: 'Hotels', href: '#', current: false },
+  { name: 'Home', href: '/', current: false },
+  { name: 'Hotels', href: '/hotels', current: false },
   { name: 'Booking', href: '#', current: false },
   { name: 'Contact Us', href: '#', current: false },
 ]
