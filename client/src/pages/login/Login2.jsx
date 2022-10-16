@@ -12,7 +12,7 @@ import { faUser, faLock, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import "./login2.css";
 
 import login from "./log.svg";
-import register from "./register.svg";
+import reg from "./register.svg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
@@ -48,12 +48,53 @@ const LoginTest = () => {
     }
   };
 
+  // Register .....
+
+  const publicRequest = axios.create({
+    baseURL: "http://localhost:5000/api",
+  });
+
+  const register = async (user) => {
+    try {
+      publicRequest.post("/auth/register", user);
+    } catch (err) {}
+  };
+
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confrimPassword, setConfirmPassword] = useState("");
+  // eslint-disable-next-line
+  var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  // if(inputText.value.match(mailformat))
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    if (username.length === 0) {
+      alert("Username Field is empty");
+    } else if (username.length < 3) {
+      alert("Length should be greater than 3");
+    } else if (email.length === 0) {
+      alert("Email Field is empty");
+    } else if (!email.match(mailformat)) {
+      alert("Not Valid email address format!");
+    } else if (password.length === 0) {
+      alert("Password is empty");
+    } else if (password.length < 6) {
+      alert("Password Should be greater than 6");
+    } else if (!(confrimPassword === password)) {
+      alert("Not match the pasword");
+    } else {
+      await register({ username, email, password });
+      navigate('/')
+    }
+  };
+
   return (
     <div className={`container2 ${signup ? "" : "sign-up-mode"}`}>
       <div className="forms-container">
         <div className="signin-signup">
           <form action="" className="sign-in-form">
-            <h2 className="title">Sign In</h2>
+            <h2 className="title">Login</h2>
             <div className="input-field">
               <div className="logo">
                 <FontAwesomeIcon icon={faUser} className="input-logo" />
@@ -102,26 +143,53 @@ const LoginTest = () => {
           </form>
 
           <form action="" className="sign-up-form">
-            <h2 className="title">Sign Up</h2>
+            <h2 className="title">Register</h2>
             <div className="input-field">
               <div className="logo">
                 <FontAwesomeIcon icon={faUser} className="input-logo" />
               </div>
-              <input type="text" placeholder="Username" />
+              <input
+                type="text"
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Username"
+              />
             </div>
             <div className="input-field">
               <div className="logo">
                 <FontAwesomeIcon icon={faEnvelope} className="input-logo" />
               </div>
-              <input type="text" placeholder="Email" />
+              <input
+                type="text"
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+              />
             </div>
             <div className="input-field">
               <div className="logo">
                 <FontAwesomeIcon icon={faLock} className="input-logo" />
               </div>
-              <input type="password" placeholder="Password" />
+              <input
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+              />
             </div>
-            <input type="submit" value="Sign up" className="btn solid" />
+            <div className="input-field">
+              <div className="logo">
+                <FontAwesomeIcon icon={faLock} className="input-logo" />
+              </div>
+              <input
+                type="password"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="Confirm Password"
+              />
+            </div>
+            <input
+              type="submit"
+              onClick={handleSignUp}
+              value="Sign up"
+              className="btn solid"
+            />
 
             {/* <p className="social-text">Or Sign up With Social Network</p>
             <div className="social-media">
@@ -170,7 +238,7 @@ const LoginTest = () => {
               Sign In
             </button>
           </div>
-          <img src={register} className="image" alt="log" />
+          <img src={reg} className="image" alt="log" />
         </div>
       </div>
     </div>
