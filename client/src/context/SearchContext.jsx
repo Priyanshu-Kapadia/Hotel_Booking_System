@@ -4,9 +4,9 @@ const INITIAL_STATE = {
   city: undefined,
   dates: [],
   options: {
-    adult: undefined,
-    children: undefined,
-    room: undefined,
+    adults: undefined,
+    childrens: undefined,
+    rooms: undefined,
   },
 };
 
