@@ -12,6 +12,8 @@ import {
 } from "react-router-dom";
 import Login from "./pages/login/Login";
 import LoginTest from "./pages/login/Login2";
+import Success from "./pages/Success";
+import Booking from "./pages/Booking";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route path="/hotels" element={<List/>}/>
         <Route path="/hotels/:id" element={<Hotel/>}/>
         <Route path="/login" element={<LoginTest/>}/>
+        <Route path="/success" element={<Success/>}/>
+        <Route path="/booking" element={<Booking/>}/>
       </Routes>
     </BrowserRouter>
   );

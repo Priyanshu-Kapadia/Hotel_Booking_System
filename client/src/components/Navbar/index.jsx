@@ -8,7 +8,7 @@ import { AuthContext } from "../../context/AuthContext";
 const navigation = [
   { name: "Home", href: "/", current: false },
   { name: "Hotels", href: "/hotels", current: false },
-  { name: "Booking", href: "#", current: false },
+  { name: "Booking", href: "/booking", current: false },
   { name: "Contact Us", href: "#", current: false },
 ];
 

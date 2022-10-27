@@ -29,17 +29,18 @@ const Hotel = () => {
 
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [amount,setAmount] = useState(0);
 
   const { dates, options } = useContext(SearchContext);
 
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
   function dayDifference(date1, date2) {
-    const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+    const timeDiff = Math.abs(date2?.getTime() - date1?.getTime());
     const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
     return diffDays;
   }
 
-  const days = dayDifference(dates[0].endDate, dates[0].startDate);
+  const days = dayDifference(dates[0]?.endDate, dates[0]?.startDate);
 
   // const photos = [
   //   {
@@ -81,6 +82,9 @@ const Hotel = () => {
 
   const handleClick = () => {
     if(user) {
+      setAmount(
+        days * data.cheapestPrice * options.rooms
+      ),console.log(amount);
       setOpenModal(true);
     } else {
       navigate("/login")
@@ -172,7 +176,7 @@ const Hotel = () => {
           }
         </>
       )}
-      {openModal && <Reserve setOpen={setOpenModal} hotelId={id}/>}
+      {openModal && <Reserve setOpen={setOpenModal} hotelId={id} amount={amount} date={dates} option={options} hotelTitle={data.title}/>}
     </div>
   );
 };

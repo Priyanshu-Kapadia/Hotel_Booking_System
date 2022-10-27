@@ -7,11 +7,13 @@ import { useContext, useState } from "react";
 import { SearchContext } from "../../../../context/SearchContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../../context/AuthContext";
 
-const Reserve = ({ setOpen, hotelId }) => {
+const Reserve = ({ setOpen, hotelId, amount, date, option, hotelTitle }) => {
   const [selectedRooms, setSelectedRooms] = useState([]);
   const { data, loading, error } = useFetch(`http://localhost:5000/api/hotels/room/${hotelId}`);
   const { dates } = useContext(SearchContext);
+  const { user } = useContext(AuthContext);
 
   const getDatesInRange = (startDate, endDate) => {
     const start = new Date(startDate);
@@ -51,6 +53,62 @@ const Reserve = ({ setOpen, hotelId }) => {
 
   const navigate = useNavigate();
 
+  function loadScript(src) {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  }
+
+  async function displayRazorpay() {
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
+
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+
+    const data = await fetch("https://shopera-backend.herokuapp.com/api/checkout/payment", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ amount: amount}),
+    }).then((t) => t.json());
+
+    const options = {
+      key: "rzp_test_8Ivs9mo9wHlcFk", // Enter the Key ID generated from the Dashboard
+      amount: data.amount * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      currency: data.currency,
+      name: "Home Square",
+      description: "Test Transaction",
+      image: "https://i.ibb.co/bsC7fMq/HomeBNB.png",
+      order_id: data.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      handler: function (response) {
+        // alert(response.razorpay_payment_id);
+        // alert(response.razorpay_order_id);
+        navigate("/success", {
+          state: { stripeData: {order_id: response.razorpay_order_id} , amount: amount, dates: date, options: option, roomId: selectedRooms[0], title:hotelTitle, userId: user._id},
+        });
+      },
+      prefill: {
+        name: "Priyanshu Kapadia",
+      },
+      theme: {
+        color: "#3399cc",
+      },
+    };
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+  }
+
   const handleClick = async () => {
     try {
       await Promise.all(
@@ -62,9 +120,11 @@ const Reserve = ({ setOpen, hotelId }) => {
         })
       );
       setOpen(false);
-      navigate("/");
+      displayRazorpay();
+      // navigate("/");
     } catch (err) {}
   };
+
   return (
     <div className="reserve">
       <div className="rContainer">
@@ -86,7 +146,7 @@ const Reserve = ({ setOpen, hotelId }) => {
             </div>
             <div className="rSelectRooms">
               {item.roomNumbers.map((roomNumber) => (
-                <div className="room">
+                <div className="room" key={roomNumber._id}>
                   <label>{roomNumber.number}</label>
                   <input
                     type="checkbox"
