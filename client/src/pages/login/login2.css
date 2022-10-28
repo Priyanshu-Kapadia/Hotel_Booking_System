@@ -108,6 +108,11 @@ form.sign-up-form {
   font-weight: 500;
 }
 
+.input-field input[type="date"]::placeholder {
+  color: #aaa;
+  font-weight: 500;
+}
+
 .btn {
   width: 150px;
   height: 49px;

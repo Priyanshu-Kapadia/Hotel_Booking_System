@@ -9,7 +9,7 @@ const navigation = [
   { name: "Home", href: "/", current: false },
   { name: "Hotels", href: "/hotels", current: false },
   { name: "Booking", href: "/booking", current: false },
-  { name: "Contact Us", href: "#", current: false },
+  // { name: "Contact Us", href: "#", current: false },
 ];
 
 function classNames(...classes) {
@@ -88,7 +88,7 @@ export default function Navbar() {
                   <>
                   <span className="mx-3 text-white">{user.username}</span>
                     <Menu as="div" className="ml-3 relative">
-                      <div>
+                      {/* <div>
                         <Menu.Button className="bg-gray-800 flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                           <span className="sr-only">Open user menu</span>
                           <img
@@ -97,7 +97,7 @@ export default function Navbar() {
                             alt=""
                           />
                         </Menu.Button>
-                      </div>
+                      </div> */}
                       {/* <Transition
                     as={Fragment}
                     enter="transition ease-out duration-100"

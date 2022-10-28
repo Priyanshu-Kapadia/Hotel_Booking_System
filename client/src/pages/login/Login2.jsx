@@ -61,18 +61,34 @@ const LoginTest = () => {
   };
 
   const [username, setUsername] = useState("");
+  const [dob, setDob] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confrimPassword, setConfirmPassword] = useState("");
   // eslint-disable-next-line
   var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   // if(inputText.value.match(mailformat))
+
+  function getAge(dateString) {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  }
+
+  const ageUser = getAge(dob);
   const handleSignUp = async (e) => {
     e.preventDefault();
     if (username.length === 0) {
       alert("Username Field is empty");
     } else if (username.length < 3) {
       alert("Length should be greater than 3");
+    } else if (ageUser < 18) {
+      alert("Age must be above 18");
     } else if (email.length === 0) {
       alert("Email Field is empty");
     } else if (!email.match(mailformat)) {
@@ -85,7 +101,7 @@ const LoginTest = () => {
       alert("Not match the pasword");
     } else {
       await register({ username, email, password });
-      navigate('/')
+      navigate("/");
     }
   };
 
@@ -152,6 +168,16 @@ const LoginTest = () => {
                 type="text"
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="Username"
+              />
+            </div>
+            <div className="input-field">
+              <div className="logo">
+                <FontAwesomeIcon icon={faUser} className="input-logo" />
+              </div>
+              <input
+                type="date"
+                onChange={(e) => setDob(e.target.value)}
+                placeholder="DOB"
               />
             </div>
             <div className="input-field">

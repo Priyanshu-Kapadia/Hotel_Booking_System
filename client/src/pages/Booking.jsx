@@ -6,6 +6,8 @@ import { AuthContext } from "../context/AuthContext";
 import Navbar from "../components/Navbar";
 import MailList from "./Home/Home Components/Mail List/MailList";
 import Footer from "../components/Footer/Footer";
+// import Moment from "react-moment";
+import * as moment from 'moment'
 
 const BookCard = styled.div`
   background-color: white;
@@ -51,8 +53,8 @@ const Booking = () => {
             </div>
             <div>
               <h4 style={{ fontSize: 20, fontWeight: 500 }}>₹ {item.amount}</h4>
-              <p>Check IN - {item.dates.startDate}</p>
-              <p>Check OUT - {item.dates.endDate}</p>
+              <p>Check IN - {moment.utc(item.dates.startDate).format("DD/MM/YYYY")}</p>
+              <p>Check OUT - {moment.utc(item.dates.endDate).format("DD/MM/YYYY")}</p>
             </div>
           </BookCard>
         ))}
