@@ -28,8 +28,8 @@ const Success = () => {
           hotel: {
             roomId: location.state.roomId,
             adults: location.state.options.adults,
-            children: location.state.options.childrens,
-            room: location.state.options.rooms,
+            childrens: location.state.options.childrens,
+            rooms: location.state.options.rooms,
             title: location.state.title,
           },
           amount: location.state.amount,
