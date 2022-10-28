@@ -14,12 +14,14 @@ import Login from "./pages/login/Login";
 import LoginTest from "./pages/login/Login2";
 import Success from "./pages/Success";
 import Booking from "./pages/Booking";
+import AllHotel from "./pages/AllHotel/AllHotel";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>}/>
+        <Route path="/hotel" element={<AllHotel/>}/>
         <Route path="/hotels" element={<List/>}/>
         <Route path="/hotels/:id" element={<Hotel/>}/>
         <Route path="/login" element={<LoginTest/>}/>

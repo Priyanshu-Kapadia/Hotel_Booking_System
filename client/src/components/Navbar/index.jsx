@@ -1,13 +1,20 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import "./Navbar.css";
 import { AuthContext } from "../../context/AuthContext";
+import { redirect, useNavigate } from "react-router-dom";
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMicrophone } from "@fortawesome/free-solid-svg-icons";
+
+
 
 const navigation = [
   { name: "Home", href: "/", current: false },
-  { name: "Hotels", href: "/hotels", current: false },
+  { name: "Hotels", href: "/hotel", current: false },
   { name: "Booking", href: "/booking", current: false },
   // { name: "Contact Us", href: "#", current: false },
 ];
@@ -17,6 +24,41 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
+  const [redirectUrl, setRedirectUrl] = useState("");
+
+  const commands = [
+    {
+      command: ["Go to *", "Open *"],
+      callback: (redirectPage) => setRedirectUrl(redirectPage,)
+    }
+  ]
+
+  const {transcript} = useSpeechRecognition({commands});
+  console.log(transcript);
+
+  const pages = ["home", "hotel", "hotels", "booking"];
+  const urls = {
+    home:"/",
+    hotel:"/hotel",
+    hotels: "/hotel",
+    booking: "/booking",
+  }
+
+  const navigate = useNavigate();
+
+  if (!SpeechRecognition.browserSupportsSpeechRecognition) {
+    return null;
+  }
+
+  if(redirectUrl){
+    if(pages.includes(redirectUrl)) {
+      console.log(urls[redirectUrl]);
+      navigate(urls[redirectUrl])
+    } else {
+      // alert("Url not exists"+`${redirectUrl}`);
+    }
+  }
+
   const logOut = () => {
     localStorage.removeItem("user");
   }
@@ -172,6 +214,18 @@ export default function Navbar() {
                     </a>
                   </>
                 )}
+                <button onClick={SpeechRecognition.startListening} style={{
+                  color: 'black',
+                  background: "white",
+                  width: 30,
+                  height: 30,
+                  borderRadius: 50,
+                  marginLeft: 15,
+                  marginRight: 15,
+                }}>
+                  <FontAwesomeIcon icon={faMicrophone} />
+                </button>
+                <p className="text-white">{transcript}</p>
               </div>
             </div>
           </div>
