@@ -176,7 +176,7 @@ const Hotel = () => {
           }
         </>
       )}
-      {openModal && <Reserve setOpen={setOpenModal} hotelId={id} amount={amount} date={dates} option={options} hotelTitle={data.title}/>}
+      {openModal && <Reserve setOpen={setOpenModal} hotelId={id} amount={amount} date={dates} option={options} hotelTitle={data.name}/>}
     </div>
   );
 };

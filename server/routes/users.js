@@ -26,12 +26,12 @@ const router = express.Router();
 router.put("/:id", verifyUser, updateUser);
 
 //Delete a User
-router.delete("/:id", verifyUser, deleteUser);
+router.delete("/:id", deleteUser);
 
 //Get a User
-router.get("/:id", verifyUser, getUser);
+router.get("/:id", getUser);
 
 //Get All Users
-router.get("/", verifyAdmin, getAllUser);
+router.get("/", getAllUser);
 
 export default router;

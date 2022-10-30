@@ -7,7 +7,7 @@ import React, { useContext, useState } from "react";
 //   faGoogle,
 // } from "@fortawesome/free-brands-svg-icons";
 
-import { faUser, faLock, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faLock, faEnvelope, faCity, faPhone } from "@fortawesome/free-solid-svg-icons";
 
 import "./login2.css";
 
@@ -62,6 +62,9 @@ const LoginTest = () => {
 
   const [username, setUsername] = useState("");
   const [dob, setDob] = useState("");
+  const [city, setCity] = useState("");
+  const [phone, setPhone] = useState("");
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confrimPassword, setConfirmPassword] = useState("");
@@ -100,7 +103,7 @@ const LoginTest = () => {
     } else if (!(confrimPassword === password)) {
       alert("Not match the pasword");
     } else {
-      await register({ username, email, password });
+      await register({ username, dob, city, phone, email, password });
       navigate("/");
     }
   };
@@ -178,6 +181,26 @@ const LoginTest = () => {
                 type="date"
                 onChange={(e) => setDob(e.target.value)}
                 placeholder="DOB"
+              />
+            </div>
+            <div className="input-field">
+              <div className="logo">
+                <FontAwesomeIcon icon={faCity} className="input-logo" />
+              </div>
+              <input
+                type="text"
+                onChange={(e) => setCity(e.target.value)}
+                placeholder="City"
+              />
+            </div>
+            <div className="input-field">
+              <div className="logo">
+                <FontAwesomeIcon icon={faPhone} className="input-logo" />
+              </div>
+              <input
+                type="text"
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="Phone Number"
               />
             </div>
             <div className="input-field">
